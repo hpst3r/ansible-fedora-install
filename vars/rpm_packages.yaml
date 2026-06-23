@@ -1,0 +1,12 @@
+---
+rpm_packages:
+  - powertop
+  - btop
+  - fastfetch
+  - gh
+  - remmina
+  - jetbrains-mono-fonts-all
+  - rsms-inter-fonts
+  - wine
+  - hugo
+  - neovim

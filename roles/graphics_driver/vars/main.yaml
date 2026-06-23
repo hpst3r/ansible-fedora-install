@@ -1,0 +1,13 @@
+---
+nvidia_packages:
+  - gcc # dep
+  - kernel-headers # dep
+  - kernel-devel # dep
+  - akmod-nvidia
+  - xorg-x11-drv-nvidia # driver
+  - xorg-x11-drv-nvidia-libs # dep
+  - xorg-x11-drv-nvidia-libs.i686 # dep
+  - libva-nvidia-driver # media accel
+amd_packages: []
+intel_packages:
+  - intel-media-driver

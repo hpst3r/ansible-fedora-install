@@ -1,0 +1,39 @@
+---
+- name: Configure workstations
+  hosts: workstations
+  roles:
+    - 1password
+    - gnome
+    - vscode
+    - graphics_driver
+  vars_files:
+    - vars/rpm_packages.yaml
+    - vars/dnf_groups.yaml
+    - vars/flatpak_packages.yaml
+
+  tasks:
+
+  - name: Update the system
+    become: true
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+
+  - name: Install individual rpm packages
+    become: true
+    ansible.builtin.dnf:
+      name: "{{ rpm_packages }}"
+      state: present
+
+  - name: Install package groups
+    become: true
+    ansible.builtin.dnf:
+      name: "@{{ item }}"
+      state: present
+    loop: "{{ dnf_groups }}"
+
+  - name: Install flatpaks
+    become: true
+    ansible.builtin.flatpak:
+      name: "{{ flatpak_packages }}"
+      state: present

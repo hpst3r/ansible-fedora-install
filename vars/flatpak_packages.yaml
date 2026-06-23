@@ -1,0 +1,8 @@
+---
+flatpak_packages:
+  - com.spotify.Client
+  - com.discordapp.Discord
+  - com.valvesoftware.Steam
+  - md.obsidian.Obsidian
+  - com.jgraph.drawio.desktop
+  - com.logseq.Logseq

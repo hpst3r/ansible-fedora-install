@@ -1,0 +1,22 @@
+---
+- name: "Import Microsoft RPM key"
+  become: true
+  ansible.builtin.rpm_key:
+    fingerprint: "BC528686B50D79E339D3721CEB3E94ADBE1229CF"
+    key: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+- name: "Add VSCode yum repository"
+  become: true
+  ansible.builtin.yum_repository:
+    name: "vscode"
+    description: "Microsoft Visual Studio Code RPM repository"
+    baseurl: "https://packages.microsoft.com/yumrepos/vscode"
+    gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+    gpgcheck: true
+    state: present
+- name: "Install Visual Studio Code package with DNF"
+  become: true
+  ansible.builtin.dnf:
+    name: "code"
+    enablerepo: "vscode"
+    state: present

@@ -1,0 +1,3 @@
+---
+dnf_groups:
+  - development-tools

@@ -1,0 +1,22 @@
+---
+- name: Import 1Password RPM GPG key
+  become: true
+  ansible.builtin.rpm_key:
+    fingerprint: "3FEF9748469ADBE15DA7CA80AC2D62742012EA22"
+    key: "https://downloads.1password.com/linux/keys/1password.asc"
+    state: present
+- name: Enable 1Password yum repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: 1password
+    description: "Official 1Password yum repository"
+    baseurl: "https://downloads.1password.com/linux/rpm/stable/x86_64"
+    gpgkey: "https://downloads.1password.com/linux/keys/1password.asc"
+    gpgcheck: true
+    enabled: true
+    state: present
+- name: Install 1Password rpm package
+  become: true
+  ansible.builtin.dnf:
+    name: 1password
+    state: present

@@ -1,0 +1,12 @@
+---
+- name: "Disable mouse acceleration"
+  community.general.dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "'flat'"
+    state: present
+- name: "Set window titlebar button layout"
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/preferences/button-layout"
+    value: "'appmenu:minimize,maximize,close'"
+    state: present
+#  - name: "Set font aliasing to rgba"
