@@ -2,9 +2,9 @@
 mouse_acceleration_profile: "flat"
 titlebar_button_layout: "appmenu:minimize,maximize,close"
 set_interface_font: true
-interface_font_name: "Inter"
+interface_font_name: "Cantarell"
 set_document_font: true
-document_font_name: "Inter"
+document_font_name: "Cantarell"
 set_monospace_font: true
 monospace_font_name: "JetBrains Mono"
 antialiasing_mode: "grayscale" # rgba none
