@@ -6,6 +6,7 @@
     - gnome
     - vscode
     - graphics_driver
+    - rpmfusion
   vars_files:
     - vars/rpm_packages.yaml
     - vars/dnf_groups.yaml
