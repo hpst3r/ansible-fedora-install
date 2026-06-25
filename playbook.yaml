@@ -3,10 +3,18 @@
   hosts: workstations
   roles:
     - 1password
-    - gnome
+    - role: gnome
+      vars:
+        set_interface_font: true
+        set_document_font: true
+        set_monospace_font: true
     - vscode
     - graphics_driver
     - rpmfusion
+    - ffmpeg_swap
+    - role: quiet_boot
+      vars:
+        quiet_boot: false
   vars_files:
     - vars/rpm_packages.yaml
     - vars/dnf_groups.yaml

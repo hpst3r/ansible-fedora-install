@@ -2,11 +2,33 @@
 - name: "Disable mouse acceleration"
   community.general.dconf:
     key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
-    value: "'flat'"
+    value: "'{{ mouse_acceleration_profile }}'"
     state: present
 - name: "Set window titlebar button layout"
   community.general.dconf:
     key: "/org/gnome/desktop/wm/preferences/button-layout"
-    value: "'appmenu:minimize,maximize,close'"
+    value: "'{{ titlebar_button_layout }}'"
     state: present
-#  - name: "Set font aliasing to rgba"
+- name: "Set the system interface font to {{ interface_font_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/font-name"
+    value: "'{{ interface_font_name }}'"
+    state: present
+  when: set_interface_font
+- name: "Set the system document font to {{ document_font_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/document-font-name"
+    value: "'{{ document_font_name }}'"
+    state: present
+  when: set_document_font
+- name: "Set the system monospace font to {{ monospace_font_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/monospace-font-name"
+    value: "'{{ monospace_font_name }}'"
+    state: present
+  when: set_monospace_font
+- name: "Set font antialiasing to {{ antialiasing_mode }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/font-antialiasing"
+    value: "'{{ antialiasing_mode }}'"
+    state: present

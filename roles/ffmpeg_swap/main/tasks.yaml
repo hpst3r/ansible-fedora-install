@@ -1,0 +1,7 @@
+---
+- name: Swap ffmpeg-free for ffmpeg
+  become: true
+  ansible.builtin.command: 'dnf swap {{ ffmpeg_free_package }} {{ ffmpeg_nonfree_package }} --allowerasing -y'
+- name: update multimedia group
+  become: true
+  ansible.builtin.command: 'dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y'

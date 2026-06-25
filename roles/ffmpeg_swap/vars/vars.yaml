@@ -1,0 +1,3 @@
+---
+ffmpeg_free_package: "ffmpeg-free"
+ffmpeg_nonfree_package: "ffmpeg"

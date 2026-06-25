@@ -1,0 +1,9 @@
+---
+- name: "Disable quiet boot for all kernels"
+  become: true
+  ansible.builtin.command: "grubby --update-kernel=ALL --remove-args='quiet'"
+  when: not quiet_boot
+- name: "Enable quiet boot for all kernels"
+  become: true
+  ansible.builtin.command: "grubby --update-kernel=ALL --args='quiet'"
+  when: quiet_boot
