@@ -1,0 +1,16 @@
+---
+- name: Add tailscale yum repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: 1password
+    description: "Official Tailscale yum repository"
+    baseurl: "https://pkgs.tailscale.com/stable/fedora/tailscale.repo"
+    gpgkey: "https://pkgs.tailscale.com/stable/fedora/repo.gpg"
+    gpgcheck: true
+    enabled: true
+    state: present
+- name: Install tailscale rpm package
+  become: true
+  ansible.builtin.dnf:
+    name: tailscale
+    state: present

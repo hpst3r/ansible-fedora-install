@@ -3,6 +3,7 @@
   hosts: workstations
   roles:
     - 1password
+    - tailscale
     - role: gnome
       vars:
         set_interface_font: true
