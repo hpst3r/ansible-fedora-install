@@ -1,9 +1,23 @@
 ---
+- name: "Determine whether quiet boot is enabled for all kernels"
+  ansible.builtin.shell: |
+    set -o pipefail
+    grubby --info=ALL | grep -E "^args=\"" | grep quiet
+  register: quiet_boot_grep_grubby_output
+  changed_when: false
+
 - name: "Disable quiet boot for all kernels"
   become: true
   ansible.builtin.command: "grubby --update-kernel=ALL --remove-args='quiet'"
-  when: not quiet_boot
+  changed_when: true
+  when:
+    - not quiet_boot_enabled
+    - quiet_boot_grep_grubby_output
+
 - name: "Enable quiet boot for all kernels"
   become: true
   ansible.builtin.command: "grubby --update-kernel=ALL --args='quiet'"
-  when: quiet_boot
+  changed_when: true
+  when:
+    - quiet_boot_enabled
+    - not quiet_boot_grep_grubby_output

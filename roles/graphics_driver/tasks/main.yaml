@@ -1,22 +1,27 @@
 ---
 - name: "Detect system graphics hardware"
-  ansible.builtin.shell: 'lspci | grep -E ".*VGA compatible controller:"'
-  register: lspci_output
+  ansible.builtin.shell: |
+    set -o pipefail
+    lspci | grep -E ".*VGA compatible controller:"
+  args:
+    executable: /bin/bash
+  register: graphics_driver_lspci_output
+  changed_when: false
 - name: "Install Nvidia graphics driver and media codecs, where applicable"
   become: true
   ansible.builtin.dnf:
-    name: "{{ nvidia_packages }}"
+    name: "{{ graphics_driver_nvidia_packages }}"
     state: present
   when: "'NVIDIA' in lspci_output"
 - name: "Install AMD graphics driver and media codecs, where applicable"
   become: true
   ansible.builtin.dnf:
-    name: "{{ amd_packages }}"
+    name: "{{ graphics_driver_amd_packages }}"
     state: present
   when: "'AMD' in lspci_output"
 - name: "Install Intel graphics driver and media codecs, where applicable"
   become: true
   ansible.builtin.dnf:
-    name: "{{ intel_packages }}"
+    name: "{{ graphics_driver_intel_packages }}"
     state: present
   when: "'Intel' in lspci_output"

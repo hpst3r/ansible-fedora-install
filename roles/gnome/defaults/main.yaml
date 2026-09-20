@@ -1,10 +1,12 @@
 ---
-mouse_acceleration_profile: "flat"
-titlebar_button_layout: "appmenu:minimize,maximize,close"
-set_interface_font: true
-interface_font_name: "Cantarell"
-set_document_font: true
-document_font_name: "Cantarell"
-set_monospace_font: true
-monospace_font_name: "JetBrains Mono"
-antialiasing_mode: "grayscale" # rgba none
+gnome_mouse_acceleration_profile: "flat"
+gnome_titlebar_button_layout: "appmenu:minimize,maximize,close"
+# font changes via gsettings/dconf appear to
+# break GNOME shell as of 50.x w F44.
+gnome_set_interface_font: false
+gnome_interface_font_name: "Adwaita Sans"
+gnome_set_document_font: false
+gnome_document_font_name: "Adwaita Sans"
+gnome_set_monospace_font: false
+gnome_monospace_font_name: "Adwaita Mono"
+gnome_antialiasing_mode: "grayscale" # rgba none

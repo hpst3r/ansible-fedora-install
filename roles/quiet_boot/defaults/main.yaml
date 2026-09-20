@@ -1,2 +1,2 @@
 ---
-quiet_boot: false
+quiet_boot_enabled: false

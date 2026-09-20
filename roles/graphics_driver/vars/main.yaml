@@ -1,5 +1,5 @@
 ---
-nvidia_packages:
+graphics_driver_nvidia_packages:
   - gcc # dep
   - kernel-headers # dep
   - kernel-devel # dep
@@ -8,6 +8,6 @@ nvidia_packages:
   - xorg-x11-drv-nvidia-libs # dep
   - xorg-x11-drv-nvidia-libs.i686 # dep
   - libva-nvidia-driver # media accel
-amd_packages: []
-intel_packages:
+graphics_driver_amd_packages: []
+graphics_driver_intel_packages:
   - intel-media-driver

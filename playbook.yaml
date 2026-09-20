@@ -2,20 +2,20 @@
 - name: Configure workstations
   hosts: workstations
   roles:
-    - 1password
+    - onepassword
     - tailscale
     - role: gnome
       vars:
-        set_interface_font: true
-        set_document_font: true
-        set_monospace_font: true
+        gnome_set_interface_font: false
+        gnome_set_document_font: false
+        gnome_set_monospace_font: false
     - vscode
     - graphics_driver
     - rpmfusion
     - ffmpeg_swap
     - role: quiet_boot
       vars:
-        quiet_boot: false
+        quiet_boot_enabled: false
   vars_files:
     - vars/rpm_packages.yaml
     - vars/dnf_groups.yaml
@@ -23,27 +23,28 @@
 
   tasks:
 
-  - name: Update the system
-    become: true
-    ansible.builtin.dnf:
-      name: "*"
-      state: latest
+    - name: Update the system
+      become: true
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_only: true
 
-  - name: Install individual rpm packages
-    become: true
-    ansible.builtin.dnf:
-      name: "{{ rpm_packages }}"
-      state: present
+    - name: Install individual rpm packages
+      become: true
+      ansible.builtin.dnf:
+        name: "{{ rpm_packages }}"
+        state: present
 
-  - name: Install package groups
-    become: true
-    ansible.builtin.dnf:
-      name: "@{{ item }}"
-      state: present
-    loop: "{{ dnf_groups }}"
+    - name: Install package groups
+      become: true
+      ansible.builtin.dnf:
+        name: "@{{ item }}"
+        state: present
+      loop: "{{ dnf_groups }}"
 
-  - name: Install flatpaks
-    become: true
-    ansible.builtin.flatpak:
-      name: "{{ flatpak_packages }}"
-      state: present
+    - name: Install flatpaks
+      become: true
+      community.general.flatpak:
+        name: "{{ flatpak_packages }}"
+        state: present

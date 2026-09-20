@@ -13,7 +13,7 @@
   ansible.builtin.dnf:
     name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
     state: present
-  when: "enable_free"
+  when: "rpmfusion_enable_free"
 
 - name: Add RPM GPG key for rpmfusion nonfree repository
   become: true
@@ -28,4 +28,4 @@
   ansible.builtin.dnf:
     name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
     state: present
-  when: "enable_nonfree"
+  when: "rpmfusion_enable_nonfree"
